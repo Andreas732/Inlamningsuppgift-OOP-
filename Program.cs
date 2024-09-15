@@ -1,25 +1,38 @@
-﻿namespace Inlämningsuppgift_3__Inkapsling_
+﻿namespace Polymorfism
 {
-    public class Car
-    {
-        // Privat fält som skyddas från direkt åtkomst
-        private string _brand;
+    using System;
 
-        // Publik egenskap för att komma åt och ändra det privata fältet
-        public string Brand
-        {
-            get { return _brand; }  // Getter för att läsa värdet
-            set { _brand = value; }  // Setter för att sätta värdet
-        }
+    public class Vehicle
+    {
+        // Virtuell metod som kan "skrivas över" i underklasser
+        public virtual void Talk() => Console.WriteLine("Generellt fordon.");
+    }
+
+    public class Car : Vehicle
+    {
+        // Skriver över den virtuella metoden för Car-klassen
+        public override void Talk() => Console.WriteLine("Detta är en bil.");
+    }
+
+    public class Truck : Vehicle
+    {
+        // Skriver över den virtuella metoden för Truck-klassen
+        public override void Talk() => Console.WriteLine("Detta är en lastbil.");
     }
 
     public class Program
     {
         static void Main(string[] args)
         {
-            Car car = new Car();
-            car.Brand = "Honda";  // Sätter värdet genom egenskapen
-            Console.WriteLine(car.Brand); // Hämtar värdet genom egenskapen, skriver "Honda"
+            // Polymorfism: Vehicle-referenser som pekar på specifika objekt
+            Vehicle car = new Car();
+            Vehicle truck = new Truck();
+
+            car.Talk();    // Använder Car:s version av Talk-metoden
+            truck.Talk();  // Använder Truck:s version av Talk-metoden
         }
     }
 }
+
+
+
